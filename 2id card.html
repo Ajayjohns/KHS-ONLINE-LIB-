@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library System</title>
+    <link href="badge.jpeg"rel="icon">
+    <link href="badge.jpeg"rel="icon">
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4A90E2, #9013FE);
+            background-image: url('books.jpg');
+            background-position: center;
+            background-size:cover ;
+            height: 100vh;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: rgb(198, 248, 15);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #357ABD;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .small-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Section Visibility */
+        .form-section {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+        .footer{
+
+            background-attachment: scroll;
+            bottom: 0;
+            text-align: center;
+            color: yellow;
+
+        }
+
+    </style>
+    
+    <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwvepUC_LnyPd8R4TgH0YYBeDy9h7a_mECtHWCd79n1Xwj88Wq9Z7TfWmwO_0U3ieKAYQ/exec";
+
+        function registerUser() {
+            const name = document.getElementById('name').value;
+            const studentClass = document.getElementById('class').value;
+            const stream = document.getElementById('stream').value;
+            const code = document.getElementById('code').value;
+            const email = document.getElementById('email').value;
+
+            fetch(scriptURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ type: "register", name, class: studentClass, stream, code, email })
+            })
+            .then(response => response.text())
+            .then(responseText => {
+                if (responseText === "Success") {
+                    alert("Registration successful!");
+                    document.getElementById("registrationForm").reset();
+                    toggleForm('loginForm');
+                } else {
+                    alert("Registration failed!");
+                }
+            })
+            .catch(error => alert("Error connecting to server!"));
+        }
+
+        function loginUser() {
+            const name = document.getElementById('loginName').value;
+            const code = document.getElementById('loginCode').value;
+
+            fetch(scriptURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ type: "login", name, code })
+            })
+            .then(response => response.text())
+            .then(responseText => {
+                if (responseText === "Success") {
+                    alert("Login successful!");
+                    window.location.href = "2id card.html";
+                } else {
+                    alert("Invalid credentials!");
+                }
+            })
+            .catch(error => alert("Error connecting to server!"));
+        }
+
+        function toggleForm(formId) {
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById(formId).classList.remove('hidden');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Registration Form -->
+        <div id="registrationForm" class="form-section">
+            <p><img src="badge.jpeg"></p>
+            <h2>Register</h2>
+            <form>
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="text" id="class" placeholder="Class" required>
+                <input type="text" id="stream" placeholder="Stream" required>
+                <input type="text" id="code" placeholder="Code" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <button type="button" onclick="registerUser()">Register</button>
+            </form>
+            <p class="small-text">Already have an account? <a href="javascript:void(0)" onclick="toggleForm('loginForm')">Login here</a></p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="form-section hidden">
+            <p><img src="file:///G:/project/KHS%20LIB/badge.jpeg"></p>
+            <h2>Login</h2>
+            <form>
+                <input type="text" id="loginName" placeholder="Full Name" required>
+                <input type="text" id="loginCode" placeholder="Code" required>
+                <button type="button" onclick="loginUser()">Login</button>
+            </form>
+            <p class="small-text">Don't have an account? <a href="javascript:void(0)" onclick="toggleForm('registrationForm')">Register here</a></p>
+        </div>
+    </div>
+    <p>    
+        <footer class="footer">
+            &copy;2025 Designed by Johnson and Evalyn
+         </footer>
+</p>
+</body>
+</html>
