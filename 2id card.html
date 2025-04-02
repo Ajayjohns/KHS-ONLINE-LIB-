@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library System</title>
-    <link href="badge.jpeg"rel="icon">
-    <link href="badge.jpeg"rel="icon">
+    <link rel="icon" href="badge.jpeg">
+    
     <style>
-        /* General Page Styles */
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #4A90E2, #9013FE);
             background-image: url('books.jpg');
             background-position: center;
-            background-size:cover ;
+            background-size: cover;
             height: 100vh;
             display: grid;
             justify-content: center;
             align-items: center;
             margin: 0;
-            flex: 1;
             overflow-y: auto;
         }
 
@@ -30,8 +28,6 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 10px;
-            margin-bottom: 15px;
             text-align: center;
         }
 
@@ -74,30 +70,18 @@
 
         .form-section {
             margin-bottom: 30px;
-        }
-
-        .small-text {
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Section Visibility */
-        .form-section {
             display: block;
         }
 
         .hidden {
             display: none;
         }
-        .footer{
 
-            background-attachment: scroll;
-            bottom: 0;
+        .footer {
             text-align: center;
             color: yellow;
-
+            margin-top: 20px;
         }
-
     </style>
     
     <script>
@@ -113,7 +97,7 @@
             fetch(scriptURL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ type: "register", name, class: studentClass, stream, code, email })
+                body: JSON.stringify({ type: "register", name, studentClass, stream, code, email })
             })
             .then(response => response.text())
             .then(responseText => {
@@ -125,7 +109,7 @@
                     alert("Registration failed!");
                 }
             })
-            .catch(error => alert("Error connecting to server!"));
+            .catch(() => alert("Error connecting to server!"));
         }
 
         function loginUser() {
@@ -141,12 +125,12 @@
             .then(responseText => {
                 if (responseText === "Success") {
                     alert("Login successful!");
-                    window.location.href = "2id card.html";
+                    window.location.href = "2id_card.html";
                 } else {
                     alert("Invalid credentials!");
                 }
             })
-            .catch(error => alert("Error connecting to server!"));
+            .catch(() => alert("Error connecting to server!"));
         }
 
         function toggleForm(formId) {
@@ -160,9 +144,9 @@
     <div class="container">
         <!-- Registration Form -->
         <div id="registrationForm" class="form-section">
-            <p><img src="badge.jpeg"></p>
+            <img src="badge.jpeg" alt="Library Badge">
             <h2>Register</h2>
-            <form>
+            <form id="registerForm">
                 <input type="text" id="name" placeholder="Full Name" required>
                 <input type="text" id="class" placeholder="Class" required>
                 <input type="text" id="stream" placeholder="Stream" required>
@@ -175,9 +159,9 @@
 
         <!-- Login Form -->
         <div id="loginForm" class="form-section hidden">
-            <p><img src="file:///G:/project/KHS%20LIB/badge.jpeg"></p>
+            <img src="badge.jpeg" alt="Library Badge">
             <h2>Login</h2>
-            <form>
+            <form id="loginFormEl">
                 <input type="text" id="loginName" placeholder="Full Name" required>
                 <input type="text" id="loginCode" placeholder="Code" required>
                 <button type="button" onclick="loginUser()">Login</button>
@@ -185,10 +169,9 @@
             <p class="small-text">Don't have an account? <a href="javascript:void(0)" onclick="toggleForm('registrationForm')">Register here</a></p>
         </div>
     </div>
-    <p>    
-        <footer class="footer">
-            &copy;2025 Designed by Johnson and Evalyn
-         </footer>
-</p>
+
+    <footer class="footer">
+        &copy; 2025 Designed by Johnson and Evalyn
+    </footer>
 </body>
 </html>
