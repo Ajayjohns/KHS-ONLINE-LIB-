@@ -3,104 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library System</title>
-    <link rel="icon" href="badge.jpeg">
-    
+    <title>O'LEVEL AND A'LEVEL</title>
+    <link href="badge.jpeg" rel="icon">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #4A90E2, #9013FE);
-            background-image: url('books.jpg');
-            background-position: center;
-            background-size: cover;
-            height: 100vh;
-            display: grid;
-            justify-content: center;
-            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
-            overflow-y: auto;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 400px;
-            background: rgb(198, 248, 15);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 0;
             text-align: center;
+            display: grid;
+            align-content: center;
         }
 
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
+        h1 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 50px;
+            text-align: center;
+            margin: 20px 0;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: 0.3s;
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
         }
 
-        input:focus {
-            border-color: #4A90E2;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            background: #4A90E2;
-            color: white;
-            border: none;
-            padding: 12px;
-            font-size: 18px;
-            border-radius: 6px;
+        .tab {
+            padding: 14px 20px;
             cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #357ABD;
-        }
-
-        .form-section {
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .footer {
-            text-align: center;
-            color: yellow;
-            margin-top: 20px;
-        }
-
-        .next-page {
-            margin-top: 20px;
-            text-decoration: none;
             color: white;
-            background: #4A90E2;
-            padding: 10px 20px;
-            border-radius: 6px;
-            display: inline-block;
+            background-color: #444;
+            border: none;
+            outline: none;
+            transition: background-color 0.3s, transform 0.3s;
+            flex: 1;
         }
 
-        .next-page:hover {
-            background: #357ABD;
+        .tab:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        .tab.active {
+            background-color: #4CAF50;
+        }
+
+        .content-container {
+            display: none;
+            padding: 20px;
+            transition: opacity 0.5s ease;
+            
+        }
+
+        .content-container.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2,1fr, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color:none;
+        }
+
+        .button-container button {
+            padding: 15px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: solid;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 5px;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .button-container button.clicked {
+            background-color: green !important;
+        }
+
+        .book-section {
+            padding: 30px;
+            width: 90%;
+            background: peru;
+            border-radius: 12px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 45px;
+        }
+
+        footer {
+            bottom: 0%;
+            padding: 10px;
+            background-color: #333;
+            color: yellow;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
         }
     </style>
-    
+</head>
+<body>
+    <div id="LIBRARY" class="book-section">
+        <h1>
+            <img src="badge.jpeg" alt="Library Badge" width="60px">
+            📚 KHS LIBRARY
+            <img src="badge.jpeg" alt="Library Badge" width="60px">
+        </h1>
+
+        <div class="tab-container">
+            <button class="tab active" onclick="openTab(1)">O'LEVEL</button>
+            <button class="tab" onclick="openTab(2)">A'LEVEL</button>
+        </div>
+
+        <div id="content1" class="content-container active">
+            <h2>Choose what you are interested in!</h2>
+            <div class="button-container" id="olevel-buttons"></div>
+        </div>
+
+        <div id="content2" class="content-container">
+            <h2>Choose what you are interested in!</h2>
+            <div class="button-container" id="alevel-buttons"></div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="registrationForm" class="content-container">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="text" id="class" placeholder="Class" required>
+                <input type="text" id="stream" placeholder="Stream" required>
+                <input type="text" id="code" placeholder="Code" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <button type="button" onclick="registerUser()">Register</button>
+            </form>
+            <p>Already have an account? <a href="javascript:void(0)" onclick="toggleForm('loginForm')">Login here</a></p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="content-container hidden">
+            <h2>Login</h2>
+            <form id="loginFormEl">
+                <input type="text" id="loginName" placeholder="Full Name" required>
+                <input type="text" id="loginCode" placeholder="Code" required>
+                <button type="button" onclick="loginUser()">Login</button>
+            </form>
+            <p>Don't have an account? <a href="javascript:void(0)" onclick="toggleForm('registrationForm')">Register here</a></p>
+        </div>
+    </div>
+
     <script>
         const scriptURL = "https://script.google.com/macros/s/AKfycbwvepUC_LnyPd8R4TgH0YYBeDy9h7a_mECtHWCd79n1Xwj88Wq9Z7TfWmwO_0U3ieKAYQ/exec";
 
+        // Tab switching functionality
+        function openTab(tabNumber) {
+            document.querySelectorAll('.content-container').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+
+            document.getElementById('content' + tabNumber).classList.add('active');
+            document.querySelectorAll('.tab')[tabNumber - 1].classList.add('active');
+        }
+
+        // Register user and connect to server
         function registerUser() {
             const name = document.getElementById('name').value;
             const studentClass = document.getElementById('class').value;
@@ -117,7 +190,7 @@
             .then(responseText => {
                 if (responseText === "Success") {
                     alert("Registration successful!");
-                    document.getElementById("registrationForm").reset();
+                    document.getElementById("registerForm").reset();
                     toggleForm('loginForm');
                 } else {
                     alert("Registration failed!");
@@ -126,6 +199,7 @@
             .catch(() => alert("Error connecting to server!"));
         }
 
+        // Login user and connect to server
         function loginUser() {
             const name = document.getElementById('loginName').value;
             const code = document.getElementById('loginCode').value;
@@ -147,50 +221,14 @@
             .catch(() => alert("Error connecting to server!"));
         }
 
+        // Toggle between registration and login forms
         function toggleForm(formId) {
             document.getElementById('registrationForm').classList.add('hidden');
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById(formId).classList.remove('hidden');
         }
     </script>
-</head>
-<body>
-    <div class="container">
-        <!-- Registration Form -->
-        <div id="registrationForm" class="form-section">
-            <img src="badge.jpeg" alt="Library Badge">
-            <h2>Register</h2>
-            <form id="registerForm">
-                <input type="text" id="name" placeholder="Full Name" required>
-                <input type="text" id="class" placeholder="Class" required>
-                <input type="text" id="stream" placeholder="Stream" required>
-                <input type="text" id="code" placeholder="Code" required>
-                <input type="email" id="email" placeholder="Email" required>
-                <button type="button" onclick="registerUser()">Register</button>
-            </form>
-            <p class="small-text">Already have an account? <a href="javascript:void(0)" onclick="toggleForm('loginForm')">Login here</a></p>
-        </div>
 
-        <!-- Login Form -->
-        <div id="loginForm" class="form-section hidden">
-            <img src="badge.jpeg" alt="Library Badge">
-            <h2>Login</h2>
-            <form id="loginFormEl">
-                <input type="text" id="loginName" placeholder="Full Name" required>
-                <input type="text" id="loginCode" placeholder="Code" required>
-                <a href="3A_LEVEL AND O_LEVEL.html>
-                    <button type="button" onclick="loginUser()">Login</button>
-                    <a>
-            </form>
-            <p class="small-text">Don't have an account? <a href="javascript:void(0)" onclick="toggleForm('registrationForm')">Register here</a></p>
-        </div>
-
-        <!-- Next Page Link -->
-        <a href="3A LEVEL AND O LEVEL.html" class="next-page">Go to Next Page</a>
-    </div>
-
-    <footer class="footer">
-        &copy; 2025 Designed by Johnson and Evalyn
-    </footer>
+    <footer> &copy; Designed by Johnson and Evalyn</footer>
 </body>
 </html>
