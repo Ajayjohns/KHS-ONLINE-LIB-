@@ -80,15 +80,30 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             border-radius: 5px;
+   .button-containera button {
+            padding: 15px;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+            border: solid;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 5px;
         }
 
         .button-container button:hover {
             background-color: #0056b3;
             transform: scale(1.05);
         }
+.button-containera button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
 
         .button-container button.clicked {
             background-color: green !important;
+        }
+ .button-containera button.clicked {
+            background-color: blue !important;
         }
         .book-section{
         padding: 30px;
@@ -132,7 +147,7 @@
 
     <div id="content2" class="content-container">
         <h2>Choose what you are interested in!</h2>
-        <div class="button-container" id="alevel-buttons"></div>
+        <div class="button-containera" id="alevel-buttons"></div>
     </div>
     </div>
 
